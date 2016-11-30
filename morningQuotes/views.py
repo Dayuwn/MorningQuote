@@ -6,5 +6,5 @@ from morningQuotes.serializers import MorningQuoteSerializer
 
 # Views
 class MorningQuoteViewSet(viewsets.ModelViewSet):
-	queryset = MorningQuote.objects.all().values()
+	queryset = MorningQuote.objects.all()
 	serializer_class = MorningQuoteSerializer

@@ -13,28 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from morningQuotes import views
 from morningQuotes.models import MorningQuote
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
+from rest_framework import routers
+from morningQuotes.serializers import MorningQuoteSerializer
+from morningQuotes.views import MorningQuoteViewSet
 
-
-# Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = MorningQuote
-        fields = ('quote', 'author', 'imageURL')
-
-# ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = MorningQuote.objects.all()
-    serializer_class = UserSerializer
-
-# Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'api/morning-quote', UserViewSet)
+router.register(r'api/morning-quote', MorningQuoteViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
